@@ -1,5 +1,6 @@
 import sys
 import os
+import msvcrt as m
 
 
 os.system("pip install gitpython")
@@ -39,15 +40,15 @@ def dotnet():
     
 
     if os.path.isdir(newPath):
-        print("Pulling....")
+        print("\033[1;32;40m Pulling....")
         repo = git.Repo(newPath)
         repo.remotes.origin.pull()
-        print("Done...")
+        print("\033[1;32;40m Done...")
        
     else:
-        print("Cloning........")
+        print("\033[1;32;40m Cloning........")
         git.Git(Clone_Path).clone(GitHub_Link)
-        print("Done..")
+        print("\033[1;32;40m Done..")
 
 
 
@@ -64,12 +65,17 @@ def dotnet():
       
     
     if os.path.isdir(Destination_Path):
+        if os.path.isdir(Backup_Path):
+            print("\033[1;31;40m Backup Directory Path is Already exist. Please Change the Directory Name/Path..And Try Again!!!")
+            m.getch()
+            return 
         shutil.copytree(Destination_Path,Backup_Path)
         shutil.rmtree(Destination_Path)
 
 
     shutil.copytree(Published_File_Path,Destination_Path)
-        
+    print("\033[1;32;40m Done.. Press Any Key To Exit")
+    m.getch()
 
 
 
