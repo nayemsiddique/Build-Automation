@@ -49,10 +49,10 @@ def dotnet():
 
     if os.path.isdir(newPath):
         try:
-            print("\033[1;32;40m Pulling....")
+            print("\033[1;33;40m Pulling...\033[0;37;40m.")
             repo = git.Repo(newPath)
             repo.remotes.origin.pull()
-            print("\033[1;32;40m Done...")
+            print("\033[1;33;40m Done..\033[0;37;40m.")
         except:
             print("\033[1;31;40m Git pull not working.please check configuration and connection.\033[1;32;40m \nPress Any Key To Exit")
             m.getch()
@@ -60,11 +60,11 @@ def dotnet():
        
     else:
         try:
-            print("\033[1;32;40m Cloning........")
+            print("\033[1;33;40m Cloning......\033[0;37;40m..")
             git.Git(Clone_Path).clone(GitHub_Link)
-            print("\033[1;32;40m Done..")
+            print("\033[1;33;40m Done.\033[0;37;40m.")
         except:
-            print("\033[1;31;40m Git Clone not working.please check configuration and connection.\033[1;32;40m \nPress Any Key To Exit")
+            print("\033[1;31;40m Git Clone not working.please check configuration and connection.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
             m.getch()
             return
     os.chdir(newPath)
@@ -75,39 +75,44 @@ def dotnet():
     try:
         os.system("nuget restore")
     except:
-        print("\033[1;31;40m Restore Faild.please check nuget configuration.\033[1;32;40m \nPress Any Key To Exit")
+        print("\033[1;31;40m Restore Faild.please check nuget configuration.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
         m.getch()
         return
-
-    os.system("dotnet publish")
+    try:
+        os.system("dotnet publish")
+    except:
+        print("\033[1;31;40m Publish Faild.Try Again\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
+        m.getch()
+        return
     
       
     
     if os.path.isdir(Destination_Path):
         if os.path.isdir(Backup_Path):
-            print("\033[1;31;40m Backup Directory Path is Already exist. Please Change the Directory Name/Path..And Try Again!!! \033[1;32;40m \nPress Any Key To Exit")
+            print("\033[1;31;40m Backup Directory Path is Already exist. Please Change the Directory Name/Path..And Try Again!!! \033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
             m.getch()
             return
-        try:
-            shutil.copytree(Destination_Path,Backup_Path)
-        except:
-            print("\033[1;31;40m Backup Process Faild.please Try Again.\033[1;32;40m \nPress Any Key To Exit")
-            m.getch()
-            return
+        if  not len(os.listdir(Destination_Path))==0:
+            try:
+                shutil.copytree(Destination_Path,Backup_Path)
+            except:
+                print("\033[1;31;40m Backup Process Faild.please Try Again.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
+                m.getch()
+                return
         try:
             shutil.rmtree(Destination_Path)
         except:
-             print("\033[1;31;40m Can not Delete Previous Publish Files.please Try Again.\033[1;32;40m \nPress Any Key To Exit")
+             print("\033[1;31;40m Can not Delete Previous Publish Files.please Try Again.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
              m.getch()
              return
     try:        
         shutil.copytree(Published_File_Path,Destination_Path)
     except:
-        print("\033[1;31;40m Can not Copy Publish Files.please Try Again.\033[1;32;40m \nPress Any Key To Exit")
+        print("\033[1;31;40m Can not Copy Publish Files.please Try Again.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
         m.getch()
         return
         
-    print("\033[1;32;40m Done.. \nPress Any Key To Exit")
+    print("\033[1;32;40m publish completed. \nPress Any Key To Exit\033[0;37;40m.")
     m.getch()
 
 
