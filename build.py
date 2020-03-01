@@ -2,6 +2,8 @@ import sys
 import os
 import msvcrt as m
 
+from tqdm import tqdm
+
 os.system("pip install gitpython")
 
 os.system("pip install pandas") 
@@ -11,8 +13,6 @@ import pandas as pd
 
 import git
 import shutil 
-
-
 
 
 def dotnet():
@@ -51,17 +51,19 @@ def dotnet():
         try:
             print("\033[1;33;40m Pulling...\033[0;37;40m.")
             repo = git.Repo(newPath)
-            repo.remotes.origin.pull()
+            for i in tqdm(range(1)):
+                repo.remotes.origin.pull()
             print("\033[1;33;40m Done..\033[0;37;40m.")
         except:
-            print("\033[1;31;40m Git pull not working.please check configuration and connection.\033[1;32;40m \nPress Any Key To Exit")
+            print("\033[1;31;40m Git pull not working.please check configuration and connection.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
             m.getch()
             return
        
     else:
         try:
             print("\033[1;33;40m Cloning......\033[0;37;40m..")
-            git.Git(Clone_Path).clone(GitHub_Link)
+            for i in tqdm(range(1)):
+                git.Git(Clone_Path).clone(GitHub_Link)
             print("\033[1;33;40m Done.\033[0;37;40m.")
         except:
             print("\033[1;31;40m Git Clone not working.please check configuration and connection.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
@@ -114,8 +116,6 @@ def dotnet():
         
     print("\033[1;32;40m publish completed. \nPress Any Key To Exit\033[0;37;40m.")
     m.getch()
-
-
 
 
 #file Read Start
