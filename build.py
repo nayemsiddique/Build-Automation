@@ -1,7 +1,7 @@
 import sys
 import os
 import msvcrt as m
-
+os.system("pip install tqdm")
 from tqdm import tqdm
 
 os.system("pip install gitpython")
@@ -37,9 +37,13 @@ def dotnet():
         except:
             #print("\033[1;31;40m Clone Path Doesnot Exist")
             os.mkdir("test")
-            shutil.copytree("test",Clone_Path)
-            shutil.rmtree("test")
-            m.getch()
+            try:
+                shutil.copytree("test",Clone_Path)
+            except:
+                 print("\033[1;31;40m"+Clone_Path+"\n This Directory does not exist.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
+                 shutil.rmtree("test")
+                 m.getch()
+                 return
             #return
             
 
@@ -86,8 +90,7 @@ def dotnet():
         print("\033[1;31;40m Publish Faild.Try Again\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
         m.getch()
         return
-    
-      
+          
     
     if os.path.isdir(Destination_Path):
         if os.path.isdir(Backup_Path):
@@ -110,7 +113,7 @@ def dotnet():
     try:        
         shutil.copytree(Published_File_Path,Destination_Path)
     except:
-        print("\033[1;31;40m Can not Copy Publish Files.please Try Again.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
+        print("\033[1;31;40m Can not Copy The Publish Files,Please Check Directory Path And Try Again.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
         m.getch()
         return
         
@@ -119,14 +122,19 @@ def dotnet():
 
 
 #file Read Start
-data = pd.read_excel ('input.xlsx',sheet_name='dotnet')
+try:
+    data = pd.read_excel ('input.xlsx',sheet_name='dotnet')
+    GitHub_Link = data['Github_Link'].tolist()[0]
+    print(GitHub_Link)
+    Clone_Path = data['Clone_Path'].tolist()[0]
+    Published_File_Path = data['Published_File_Path'].tolist()[0]
+    Destination_Path = data['Destination_Path'].tolist()[0]
+    Backup_Path = data['Backup_Path'].tolist()[0]
+    dotnet()
+except:
+    print("\033[1;31;40m File does not exist.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
+    m.getch()
 
-GitHub_Link = data['Github_Link'].tolist()[0]
-print(GitHub_Link)
-Clone_Path = data['Clone_Path'].tolist()[0]
-Published_File_Path = data['Published_File_Path'].tolist()[0]
-Destination_Path = data['Destination_Path'].tolist()[0]
-Backup_Path = data['Backup_Path'].tolist()[0]
 
 
 #File Read End
@@ -134,7 +142,7 @@ Backup_Path = data['Backup_Path'].tolist()[0]
 
 
 
-dotnet()
+
 
 
     
