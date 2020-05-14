@@ -1,1 +1,8 @@
-python,pip,nuget,git global login access
+python
+pip3
+nuget
+dotnet
+node
+angular cli
+
+git global login access
