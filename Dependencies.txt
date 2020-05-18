@@ -4,4 +4,5 @@ nuget
 dotnet
 node
 angular cli
-git global login access
+
+global login access of git
