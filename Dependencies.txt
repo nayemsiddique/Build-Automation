@@ -1,0 +1,8 @@
+python
+pip3
+nuget
+dotnet
+node
+angular cli
+
+global login access of git
