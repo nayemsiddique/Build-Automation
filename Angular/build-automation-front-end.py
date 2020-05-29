@@ -52,11 +52,13 @@ def dotnet():
     
 
     if os.path.isdir(newPath):
+        os.chdir(newPath)
         try:
             print("\033[1;33;40m Pulling...\033[0;37;40m.")
-            repo = git.Repo(newPath)
+            #repo = git.Repo(newPath)
             for i in tqdm(range(1)):
-                repo.remotes.origin.pull()
+                #repo.remotes.origin.pull()
+                os.system("git pull")
             print("\033[1;33;40m Done..\033[0;37;40m.")
         except:
             print("\033[1;31;40m Git pull not working.please check configuration and connection.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
@@ -64,16 +66,19 @@ def dotnet():
             return
        
     else:
+        os.chdir(Clone_Path)
         try:
             print("\033[1;33;40m Cloning......\033[0;37;40m..")
             for i in tqdm(range(1)):
-                git.Git(Clone_Path).clone(GitHub_Link)
+                #git.Git(Clone_Path).clone(GitHub_Link)
+                os.system("git clone "+GitHub_Link)
             print("\033[1;33;40m Done.\033[0;37;40m.")
+            os.chdir(newPath)
         except:
             print("\033[1;31;40m Git Clone not working.please check configuration and connection.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
             m.getch()
             return
-    os.chdir(newPath)
+    #os.chdir(newPath)
 
 
     #Restore
@@ -116,8 +121,8 @@ def dotnet():
         print("\033[1;31;40m Can not Copy The Publish Files,Please Check Directory Path And Try Again.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
         m.getch()
         return
-
-    shutil.rmtree(Clone_Path)
+    
+    #shutil.rmtree(Clone_Path)
     print("\033[1;32;40m publish completed. \nPress Any Key To Exit\033[0;37;40m.")
     m.getch()
 
