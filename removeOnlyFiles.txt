@@ -1,0 +1,7 @@
+            for filename in os.listdir(Destination_Path):
+                print("yes")
+                newPath=os.path.join(Destination_Path+"\\\\",filename)
+                #print(filename)
+                if not os.path.isdir(newPath):
+                    #print(newPath)
+                    os.remove(newPath)

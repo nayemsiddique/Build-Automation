@@ -110,13 +110,30 @@ def dotnet():
                 m.getch()
                 return
         try:
-            shutil.rmtree(Destination_Path)
+            #shutil.rmtree(Destination_Path)
+            for filename in os.listdir(Destination_Path):
+                #print("yes")
+                newPath=os.path.join(Destination_Path+"\\\\",filename)
+                print(newPath)
+                if not os.path.isdir(newPath):
+                    #print(newPath)
+                    os.remove(newPath)
+                if filename=='assets':
+                    shutil.rmtree(newPath)
         except:
              print("\033[1;31;40m Can not Delete Previous Publish Files.please Try Again.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
              m.getch()
              return
     try:        
-        shutil.copytree(Published_File_Path,Destination_Path)
+        #shutil.copytree(Published_File_Path,Destination_Path)
+        for filename in os.listdir(Published_File_Path):
+                #print("yes")
+                newPath=os.path.join(Published_File_Path+"\\\\",filename)
+                desNewPath=os.path.join(Destination_Path+"\\\\",filename)
+                print(newPath)
+                #if not os.path.isdir(newPath):
+                    #print(newPath)
+                shutil.move(newPath,desNewPath)
     except:
         print("\033[1;31;40m Can not Copy The Publish Files,Please Check Directory Path And Try Again.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
         m.getch()
