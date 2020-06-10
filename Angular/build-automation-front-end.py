@@ -58,7 +58,7 @@ def dotnet():
             #repo = git.Repo(newPath)
             for i in tqdm(range(1)):
                 #repo.remotes.origin.pull()
-                os.system("git pull")
+                os.system("git pull origin "+Branch)
             print("\033[1;33;40m Done..\033[0;37;40m.")
         except:
             print("\033[1;31;40m Git pull not working.please check configuration and connection.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
@@ -71,7 +71,7 @@ def dotnet():
             print("\033[1;33;40m Cloning......\033[0;37;40m..")
             for i in tqdm(range(1)):
                 #git.Git(Clone_Path).clone(GitHub_Link)
-                os.system("git clone "+GitHub_Link)
+                os.system("git clone --single-branch --branch "+Branch+" "+ GitHub_Link)
             print("\033[1;33;40m Done.\033[0;37;40m.")
             os.chdir(newPath)
         except:
@@ -153,6 +153,7 @@ try:
     Published_File_Path = data['Published_File_Path'].tolist()[0]
     Destination_Path = data['Destination_Path'].tolist()[0]
     Backup_Path = data['Backup_Path'].tolist()[0]
+    Branch= data['Branch'].tolist()[0]
     dotnet()
 except:
     print("\033[1;31;40m File does not exist.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
