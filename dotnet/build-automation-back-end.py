@@ -120,7 +120,11 @@ def dotnet():
         print("\033[1;31;40m Can not Copy The Publish Files,Please Check Directory Path And Try Again.\033[1;32;40m \nPress Any Key To Exit\033[0;37;40m.")
         m.getch()
         return
-        
+    
+    os.chdir(Destination_Path)
+    with open('index.html', 'w'):
+        pass
+    
     print("\033[1;32;40m publish completed. \nPress Any Key To Exit\033[0;37;40m.")
     m.getch()
 
