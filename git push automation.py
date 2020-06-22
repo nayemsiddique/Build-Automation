@@ -1,12 +1,9 @@
-import sys
 import os
 import datetime
 import msvcrt as m
 
 x = datetime.datetime.now()
-y=str(x).replace(" ", "")
-z=y.replace(".","")
-y=z.replace(":","")
+y=str(x).replace(" ", "").replace(".","").replace(":","")
 
 p="file"
 q=".txt"
