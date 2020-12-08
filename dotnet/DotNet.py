@@ -24,7 +24,7 @@ def dotnet():
     tem=GitHub_Link.split(".")
     print(tem)
     tem=tem[1].split("/")
-    tem=tem[len(tem)-1] #petmatrix-backend-kku
+    tem=tem[len(tem)-1] 
     #end
 
     newPath=Clone_Path+"\\"+tem+"\\"
